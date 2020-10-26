@@ -1,0 +1,43 @@
+.App{
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+.App_left{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.App_right{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.counter{
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+.counter_inputs{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+.counter_inputs input{
+    width: 30%;
+}
+.counter_controls{
+    display: flex;
+}
+.counter_time{
+    font-size: 10vh;
+    margin-bottom: auto;
+}
+.List{
+    width: 100%;
+    height: 50%;
+    overflow: scroll;
+}
+.redflag{
+    color: red;
+}
