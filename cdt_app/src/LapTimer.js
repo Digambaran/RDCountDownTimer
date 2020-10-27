@@ -44,6 +44,10 @@ function LapTimer({
   return (
     <div className="Lap_Timer">
       <h2>Lap Timer</h2>
+      <p>
+        press <em>spacebar</em> to record lap and<em>backspace</em> to merge
+        previous lap
+      </p>
       <p
         className={
           timePassed.s > 20 || timePassed.m > 0 || timePassed.h > 0

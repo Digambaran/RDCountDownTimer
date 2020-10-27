@@ -111,6 +111,14 @@ function App() {
       listRef.current = laplist;
       setList(laplist);
     }
+    //get back the user entered values
+    const enteredValues =
+      JSON.parse(localStorage.getItem("EnteredDuration")) || false;
+    if (enteredValues) {
+      setHr(enteredValues.h);
+      setMin(enteredValues.m);
+      setSec(enteredValues.s);
+    }
 
     //add keydown listener on mount and clear on unmount
     document.addEventListener("keydown", keyHandler);
