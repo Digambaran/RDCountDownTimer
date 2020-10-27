@@ -41,11 +41,20 @@
     text-align: center;
 }
 .List{
-    height: 50%;
+    max-height: 400px;
     overflow: scroll;
     text-align: center;
     margin: 10px;
     border: 1px solid black;
+}
+.List_table{
+    width: 100%;
+}
+.List_table thead{
+    background: burlywood;
+}
+.List_table tbody{
+    text-align: center;
 }
 .redflag{
     color: red;

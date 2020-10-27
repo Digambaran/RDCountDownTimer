@@ -32,7 +32,14 @@ function App() {
   const keyHandler = e => {
     if (e.key === " ") {
       //enter current laptime to the list
-      setList([lapTimeRef.current, ...listRef.current]);
+      setList([
+        {
+          start: timeLeftRef.current,
+          lap: lapTimeRef.current,
+          end: timeLeftRef.current,
+        },
+        ...listRef.current,
+      ]);
       //start new lap
       setLapStartTime(new Date().getTime());
     } else if (e.key === "Backspace") {
