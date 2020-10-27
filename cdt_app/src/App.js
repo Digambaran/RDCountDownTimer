@@ -54,6 +54,8 @@ function App() {
         },
         ...listRef.current,
       ]);
+      //set list in local storage
+      localStorage.setItem("LapList", JSON.stringify([...listRef.current]));
 
       //start new lap
       setLapStartTime(new Date().getTime());
@@ -84,6 +86,14 @@ function App() {
         : setPausedTimeStamp(now);
       setDuration(present.total);
       present.pause === false && setOn(true);
+    }
+
+    //get stored lap list from localstorage
+    const laplist = JSON.parse(localStorage.getItem("LapList")) || false;
+    if (laplist) {
+      console.log("l", laplist);
+      listRef.current = laplist;
+      setList(laplist);
     }
 
     //add keydown listener on mount and clear on unmount

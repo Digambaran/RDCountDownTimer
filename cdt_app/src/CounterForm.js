@@ -81,7 +81,8 @@ const CounterForm = React.memo(
                   })
                 );
               }
-            }}>
+            }}
+          >
             start
           </button>
 
@@ -99,7 +100,8 @@ const CounterForm = React.memo(
                   pause: true,
                 })
               );
-            }}>
+            }}
+          >
             pause
           </button>
           <button
@@ -117,7 +119,8 @@ const CounterForm = React.memo(
                 })
               );
             }}
-            disabled={timerOn}>
+            disabled={timerOn}
+          >
             resume
           </button>
 
@@ -132,8 +135,10 @@ const CounterForm = React.memo(
               setLapTime({h: 0, m: 0, s: 0, ms: 0});
               setList([]);
               localStorage.removeItem("counter");
+              localStorage.removeItem("LapList");
             }}
-            disabled={timerOn}>
+            disabled={timerOn}
+          >
             reset
           </button>
         </div>
