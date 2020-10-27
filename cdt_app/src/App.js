@@ -61,7 +61,8 @@ function App() {
       //add the top entry in lap to current lap
       listRef.current.length !== 0 &&
         setLapStartTime(
-          lapStartTimeRef.current - calculateMilliSeconds(listRef.current[0])
+          lapStartTimeRef.current -
+            calculateMilliSeconds(listRef.current[0].lap)
         );
 
       //remove the top entry from list after merging
