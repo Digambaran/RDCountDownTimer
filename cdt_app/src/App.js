@@ -1,9 +1,10 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "./App.css";
 import Counter from "./Counter";
-import List from "./List";
 import CounterForm from "./CounterForm";
+import calculateMilliSeconds from "./helperFuntions/calculateMilliSeconds";
 import LapTimer from "./LapTimer";
+import List from "./List";
 
 const calculateTimeObject = (startingtime, total, now) => {
   let difference = Math.floor(total - (now - startingtime));
@@ -13,9 +14,6 @@ const calculateTimeObject = (startingtime, total, now) => {
     s: Math.floor((difference / 1000) % 60),
     ms: Math.floor((difference / 1) % 1000),
   };
-};
-const calculateMilliSec = ({h, m, s, ms}) => {
-  return h * 3600000 + m * 60000 + s * 1000 + ms;
 };
 
 function App() {
@@ -63,7 +61,7 @@ function App() {
       //add the top entry in lap to current lap
       listRef.current.length !== 0 &&
         setLapStartTime(
-          lapStartTimeRef.current - calculateMilliSec(listRef.current[0])
+          lapStartTimeRef.current - calculateMilliSeconds(listRef.current[0])
         );
 
       //remove the top entry from list after merging

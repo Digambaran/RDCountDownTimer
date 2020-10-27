@@ -1,7 +1,5 @@
 import React from "react";
-
-const calculateTotal = (hr, min, sec) =>
-  hr * 3600000 + min * 60000 + sec * 1000;
+import calculateMilliSeconds from "./helperFuntions/calculateMilliSeconds";
 
 const CounterForm = React.memo(
   ({
@@ -65,12 +63,19 @@ const CounterForm = React.memo(
                 setOn(true);
                 setStartTimeStamp(st);
                 setLapStartTime(st);
-                setTotal(calculateTotal(hour, minute, second));
+                setTotal(
+                  calculateMilliSeconds({h: hour, m: minute, s: second, ms: 0})
+                );
                 localStorage.setItem(
                   "counter",
                   JSON.stringify({
                     starttimestamp: st,
-                    total: calculateTotal(hour, minute, second),
+                    total: calculateMilliSeconds({
+                      h: hour,
+                      m: minute,
+                      s: second,
+                      ms: 0,
+                    }),
                     pausedtimestamp: 0,
                     pause: false,
                   })
@@ -111,7 +116,8 @@ const CounterForm = React.memo(
                   pause: false,
                 })
               );
-            }}>
+            }}
+            disabled={timerOn}>
             resume
           </button>
 
