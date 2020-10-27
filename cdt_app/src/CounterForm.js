@@ -20,6 +20,7 @@ const CounterForm = React.memo(
     setTimeLeft,
     setLapTime,
     setLapStartTime,
+    lapStartTime,
     setList,
   }) => {
     return (
@@ -109,6 +110,7 @@ const CounterForm = React.memo(
               setOn(true);
               const now = new Date().getTime();
               setStartTimeStamp(startTimeStamp + (now - pausedTimeStamp));
+              setLapStartTime(lapStartTime + (now - pausedTimeStamp));
               localStorage.setItem(
                 "counter",
                 JSON.stringify({
@@ -119,7 +121,7 @@ const CounterForm = React.memo(
                 })
               );
             }}
-            disabled={timerOn}
+            disabled={timerOn || startTimeStamp === 0}
           >
             resume
           </button>
