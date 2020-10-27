@@ -4,6 +4,7 @@
 .App{
     display: flex;
     margin: 10px;
+    height:96vh;
     flex-wrap: wrap;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -43,7 +44,7 @@
 }
 .List{
     max-height: 370px;
-    min-height: 200px;
+    height: 100%;
     overflow: scroll;
     text-align: center;
     margin: 10px;

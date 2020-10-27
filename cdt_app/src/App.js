@@ -46,43 +46,47 @@ function App() {
 
   const keyHandler = e => {
     if (e.key === " ") {
-      //enter current laptime to the list
-      const lap = [
-        {
-          start: calculateTimeObject(
-            sTSRef.current,
-            durationRef.current,
-            lapStartTimeRef.current > 0
-              ? lapStartTimeRef.current
-              : sTSRef.current
-          ),
-          lap: lapTimeRef.current,
-          end: timeLeftRef.current,
-        },
-        ...listRef.current,
-      ];
-      setList(lap);
-      //set list in local storage
-      localStorage.setItem("LapList", JSON.stringify(lap));
+      if (sTSRef.current > 0) {
+        //enter current laptime to the list
+        const lap = [
+          {
+            start: calculateTimeObject(
+              sTSRef.current,
+              durationRef.current,
+              lapStartTimeRef.current > 0
+                ? lapStartTimeRef.current
+                : sTSRef.current
+            ),
+            lap: lapTimeRef.current,
+            end: timeLeftRef.current,
+          },
+          ...listRef.current,
+        ];
+        setList(lap);
+        //set list in local storage
+        localStorage.setItem("LapList", JSON.stringify(lap));
 
-      const n = new Date().getTime();
-      //start new lap
-      setLapStartTime(n);
+        const n = new Date().getTime();
+        //start new lap
+        setLapStartTime(n);
 
-      //set lapstarttime in localstorage
-      localStorage.setItem("LapStartTimeStamp", n);
+        //set lapstarttime in localstorage
+        localStorage.setItem("LapStartTimeStamp", n);
+      }
     } else if (e.key === "Backspace") {
-      //add the top entry in lap to current lap
-      listRef.current.length !== 0 &&
-        setLapStartTime(
-          lapStartTimeRef.current -
-            calculateMilliSeconds(listRef.current[0].lap)
-        );
-      //update the lapstarttime in localstorage
-      localStorage.setItem("LapStartTimeStamp", lapStartTimeRef.current);
+      if (sTSRef.current > 0) {
+        //add the top entry in lap to current lap
+        listRef.current.length !== 0 &&
+          setLapStartTime(
+            lapStartTimeRef.current -
+              calculateMilliSeconds(listRef.current[0].lap)
+          );
+        //update the lapstarttime in localstorage
+        localStorage.setItem("LapStartTimeStamp", lapStartTimeRef.current);
 
-      //remove the top entry from list after merging
-      setList([...listRef.current.filter((v, i) => i !== 0)]);
+        //remove the top entry from list after merging
+        setList([...listRef.current.filter((v, i) => i !== 0)]);
+      }
     }
   };
   useEffect(() => {
