@@ -5,6 +5,15 @@ import List from "./List";
 import CounterForm from "./CounterForm";
 import LapTimer from "./LapTimer";
 
+const calculateTimeObject = (startingtime, total, now) => {
+  let difference = Math.floor(total - (now - startingtime));
+  return {
+    h: Math.floor((difference / 3600000) % 24),
+    m: Math.floor((difference / 1000 / 60) % 60),
+    s: Math.floor((difference / 1000) % 60),
+    ms: Math.floor((difference / 1) % 1000),
+  };
+};
 const calculateMilliSec = ({h, m, s, ms}) => {
   return h * 3600000 + m * 60000 + s * 1000 + ms;
 };
@@ -23,23 +32,31 @@ function App() {
   const [list, setList] = useState([]);
 
   //use Ref because listeners cant access latest state because it is part of initial mount
-  const timeLeftRef = useRef(timeLeft);
-  const listRef = useRef(list);
-  const sTSRef = useRef(startTimeStamp);
-  const lapTimeRef = useRef(lapTime);
-  const lapStartTimeRef = useRef(lapStartTime);
+  const timeLeftRef = useRef(timeLeft); //object
+  const listRef = useRef(list); //object
+  const sTSRef = useRef(startTimeStamp); //millisec value
+  const lapTimeRef = useRef(lapTime); //object
+  const lapStartTimeRef = useRef(lapStartTime); //millisec value
+  const durationRef = useRef(duration); //millisec value
 
   const keyHandler = e => {
     if (e.key === " ") {
       //enter current laptime to the list
       setList([
         {
-          start: timeLeftRef.current,
+          start: calculateTimeObject(
+            sTSRef.current,
+            durationRef.current,
+            lapStartTimeRef.current > 0
+              ? lapStartTimeRef.current
+              : sTSRef.current
+          ),
           lap: lapTimeRef.current,
           end: timeLeftRef.current,
         },
         ...listRef.current,
       ]);
+
       //start new lap
       setLapStartTime(new Date().getTime());
     } else if (e.key === "Backspace") {
@@ -69,6 +86,7 @@ function App() {
       setDuration(present.total);
       present.pause === false && setOn(true);
     }
+
     //add keydown listener on mount and clear on unmount
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
@@ -84,10 +102,15 @@ function App() {
     sTSRef.current = startTimeStamp;
   }, [startTimeStamp]);
 
-  //to update timestamp ref
+  //to update timestamp ref for lap start time
   useEffect(() => {
     lapStartTimeRef.current = lapStartTime;
   }, [lapStartTime]);
+
+  //to update timestamp ref for duration
+  useEffect(() => {
+    durationRef.current = duration;
+  }, [duration]);
 
   return (
     <div className="App">

@@ -35,8 +35,8 @@ function LapTimer({
   }, [startingtime]);
 
   return (
-    <>
-      <p>countdown</p>
+    <div className="Lap_Timer">
+      <h2>Lap Timer</h2>
       <p
         className={
           timePassed.s > 20 || timePassed.m > 0 || timePassed.h > 0
@@ -45,7 +45,7 @@ function LapTimer({
         }>
         {timePassed.h}:{timePassed.m}:{timePassed.s}:{timePassed.ms}
       </p>
-    </>
+    </div>
   );
 }
 

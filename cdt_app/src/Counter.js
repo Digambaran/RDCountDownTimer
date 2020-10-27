@@ -39,9 +39,11 @@ function Counter({
   }, [startingtime]);
 
   return (
-    <p className="counter_time">
-      {timeLeft.h}:{timeLeft.m}:{timeLeft.s}:{timeLeft.ms}
-    </p>
+    <>
+      <p className="counter_time">
+        {timeLeft.h}:{timeLeft.m}:{timeLeft.s}:{timeLeft.ms}
+      </p>
+    </>
   );
 }
 

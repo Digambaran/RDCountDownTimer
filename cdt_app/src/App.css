@@ -3,8 +3,6 @@
 }
 .App{
     display: flex;
-    height: 96vmin;
-    width: 98vmax;
     margin: 10px;
     flex-wrap: wrap;
     border-top: 1px solid black;
@@ -40,18 +38,25 @@
     margin-bottom: auto;
     text-align: center;
 }
+.Lap_Timer h2{
+    text-align: center;
+}
 .List{
     max-height: 400px;
+    min-height: 200px;
     overflow: scroll;
     text-align: center;
     margin: 10px;
     border: 1px solid black;
+    margin-top: auto;
 }
 .List_table{
     width: 100%;
 }
 .List_table thead{
     background: burlywood;
+    position: sticky;
+    top:0;
 }
 .List_table tbody{
     text-align: center;

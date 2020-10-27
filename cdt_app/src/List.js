@@ -24,7 +24,9 @@ const List = React.memo(props => {
                 {" "}
                 <p
                   className={
-                    obj.s > 20 || obj.m > 0 || obj.h > 0 > 20 ? "redflag" : ""
+                    obj.lap.s > 20 || obj.lap.m > 0 || obj.lap.h > 0 > 20
+                      ? "redflag"
+                      : ""
                   }>
                   {obj.lap.h}:{obj.lap.m}:{obj.lap.s}:{obj.lap.ms}
                 </p>

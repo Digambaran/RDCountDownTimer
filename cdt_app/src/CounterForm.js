@@ -26,6 +26,8 @@ const CounterForm = React.memo(
   }) => {
     return (
       <div className="counter">
+        <h2>Count Down Timer</h2>
+
         <div className="counter_inputs">
           <input
             placeholder={"hours"}
