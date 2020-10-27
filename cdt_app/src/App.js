@@ -8,12 +8,19 @@ import List from "./List";
 
 const calculateTimeObject = (startingtime, total, now) => {
   let difference = Math.floor(total - (now - startingtime));
-  return {
-    h: Math.floor((difference / 3600000) % 24),
-    m: Math.floor((difference / 1000 / 60) % 60),
-    s: Math.floor((difference / 1000) % 60),
-    ms: Math.floor((difference / 1) % 1000),
-  };
+  return difference >= 0
+    ? {
+        h: Math.floor((difference / 3600000) % 24),
+        m: Math.floor((difference / 1000 / 60) % 60),
+        s: Math.floor((difference / 1000) % 60),
+        ms: Math.floor((difference / 1) % 1000),
+      }
+    : {
+        h: Math.ceil((difference / 3600000) % 24),
+        m: Math.ceil((difference / 1000 / 60) % 60),
+        s: Math.ceil((difference / 1000) % 60),
+        ms: Math.ceil((difference / 1) % 1000),
+      };
 };
 
 function App() {
@@ -40,7 +47,7 @@ function App() {
   const keyHandler = e => {
     if (e.key === " ") {
       //enter current laptime to the list
-      setList([
+      const lap = [
         {
           start: calculateTimeObject(
             sTSRef.current,
@@ -53,9 +60,10 @@ function App() {
           end: timeLeftRef.current,
         },
         ...listRef.current,
-      ]);
+      ];
+      setList(lap);
       //set list in local storage
-      localStorage.setItem("LapList", JSON.stringify([...listRef.current]));
+      localStorage.setItem("LapList", JSON.stringify(lap));
 
       //set lapstarttime in localstorage
       localStorage.setItem("LapStartTimeStmap", lapStartTimeRef.current);
