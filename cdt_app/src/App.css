@@ -1,42 +1,51 @@
+*,::before,::after {
+    box-sizing: border-box;
+}
 .App{
     display: flex;
-    height: 100vh;
+    height: 96vmin;
+    width: 98vmax;
+    margin: 10px;
     flex-wrap: wrap;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
-.App_left{
+.App_left,.App_right{
     display: flex;
+    flex: 1 1 50%;
     flex-direction: column;
-    flex-grow: 1;
-}
-.App_right{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
 }
 .counter{
     display: flex;
     flex-direction: column;
     margin-top: auto;
+    align-items: center;
 }
-.counter_inputs{
-    width: 60%;
+.counter_inputs,.counter_controls{
     display: flex;
     justify-content: space-between;
+    margin: 10px 0px;
+    width: 60%;
 }
 .counter_inputs input{
     width: 30%;
 }
-.counter_controls{
-    display: flex;
+.counter_controls button{
+    /* width: 20%; */
 }
 .counter_time{
     font-size: 10vh;
     margin-bottom: auto;
+    text-align: center;
 }
 .List{
-    width: 100%;
     height: 50%;
     overflow: scroll;
+    text-align: center;
+    margin: 10px;
+    border: 1px solid black;
 }
 .redflag{
     color: red;

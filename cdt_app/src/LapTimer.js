@@ -35,7 +35,12 @@ function LapTimer({
   }, [startingtime]);
 
   return (
-    <p className={timePassed.s > 20 ? "counter_time redflag" : "counter_time"}>
+    <p
+      className={
+        timePassed.s > 20 || timePassed.m > 0 || timePassed.h > 0
+          ? "counter_time redflag"
+          : "counter_time"
+      }>
       {timePassed.h}:{timePassed.m}:{timePassed.s}:{timePassed.ms}
     </p>
   );
