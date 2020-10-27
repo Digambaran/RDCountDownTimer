@@ -143,7 +143,7 @@ const CounterForm = React.memo(
               localStorage.removeItem("counter");
               localStorage.removeItem("LapList");
               localStorage.removeItem("EnteredDuration");
-              localStorage.removeItem("LapStartTimeStmap");
+              localStorage.removeItem("LapStartTimeStamp");
             }}
             disabled={timerOn}
           >

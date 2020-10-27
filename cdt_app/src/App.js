@@ -65,11 +65,12 @@ function App() {
       //set list in local storage
       localStorage.setItem("LapList", JSON.stringify(lap));
 
-      //set lapstarttime in localstorage
-      localStorage.setItem("LapStartTimeStmap", lapStartTimeRef.current);
-
+      const n = new Date().getTime();
       //start new lap
-      setLapStartTime(new Date().getTime());
+      setLapStartTime(n);
+
+      //set lapstarttime in localstorage
+      localStorage.setItem("LapStartTimeStamp", n);
     } else if (e.key === "Backspace") {
       //add the top entry in lap to current lap
       listRef.current.length !== 0 &&
@@ -78,7 +79,7 @@ function App() {
             calculateMilliSeconds(listRef.current[0].lap)
         );
       //update the lapstarttime in localstorage
-      localStorage.setItem("LapStartTimeStmap", lapStartTimeRef.current);
+      localStorage.setItem("LapStartTimeStamp", lapStartTimeRef.current);
 
       //remove the top entry from list after merging
       setList([...listRef.current.filter((v, i) => i !== 0)]);
@@ -105,12 +106,23 @@ function App() {
 
     //to set the laptime based on stored value;
     const storedLapTimerValue =
-      localStorage.getItem("LapStartTimeStamp") || false;
+      Number(localStorage.getItem("LapStartTimeStamp")) || false;
     if (storedLapTimerValue) {
-      setLapStartTime(
-        storedLapTimerValue + (now - storedCounterValues.pausedtimestamp)
+      const newLapStartTime =
+        storedLapTimerValue -
+        (storedCounterValues.pausedtimestamp > 0
+          ? now - storedCounterValues.pausedtimestamp
+          : 0);
+      setLapStartTime(newLapStartTime);
+      console.log(
+        "n",
+        newLapStartTime,
+        storedLapTimerValue,
+        storedCounterValues
       );
-      localStorage.setItem("LapStartTimeStmap", lapStartTimeRef.current);
+      localStorage.setItem("LapStartTimeStamp", newLapStartTime);
+    } else {
+      setLapStartTime(storedCounterValues.starttimestamp);
     }
 
     //get stored lap list from localstorage
