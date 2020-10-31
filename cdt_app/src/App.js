@@ -118,12 +118,6 @@ function App() {
           ? now - storedCounterValues.pausedtimestamp
           : 0);
       setLapStartTime(newLapStartTime);
-      console.log(
-        "n",
-        newLapStartTime,
-        storedLapTimerValue,
-        storedCounterValues
-      );
       localStorage.setItem("LapStartTimeStamp", newLapStartTime);
     } else {
       setLapStartTime(storedCounterValues.starttimestamp);

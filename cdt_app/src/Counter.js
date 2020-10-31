@@ -1,4 +1,13 @@
 import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import {timeType} from "./cutomTypes/types";
+/**
+ * function to calculate the time left and return a timeLeft object
+ * @param {Number} startingtime starting timestamp
+ * @param {Number} pausingtime last paused timestamp
+ * @param {Number} total total time left
+ * @returns
+ */
 const calculateTimeLeft = (startingtime, pausingtime, total) => {
   const now = new Date().getTime();
   let difference = Math.floor(total - (now - startingtime));
@@ -52,4 +61,16 @@ function Counter({
   );
 }
 
+Counter.propTypes = {
+  startingtime: PropTypes.number.isRequired,
+  pausingtime: PropTypes.number.isRequired,
+  timerOn: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+  setTotal: PropTypes.func.isRequired,
+  timeLeft: timeType,
+  setTimeLeft: PropTypes.func.isRequired,
+  tRef: PropTypes.shape({
+    current: timeType,
+  }),
+};
 export default Counter;

@@ -1,4 +1,10 @@
 import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import {timeType} from "./cutomTypes/types";
+/**
+ * returns the time differece in object
+ * @param {Number} startingtime starting timestamp
+ */
 const calculateTimeLeft = startingtime => {
   const now = new Date().getTime();
   let difference = Math.floor(now - startingtime);
@@ -40,7 +46,6 @@ function LapTimer({
   useEffect(() => {
     startingtime > 0 && setLapTime(calculateTimeLeft(startingtime));
   }, [startingtime]);
-
   return (
     <div className="Lap_Timer">
       <h2>Lap Timer</h2>
@@ -60,5 +65,14 @@ function LapTimer({
     </div>
   );
 }
-
+LapTimer.propTypes = {
+  setLapTime: PropTypes.func.isRequired,
+  setstartingtime: PropTypes.func.isRequired,
+  timePassed: timeType,
+  lRef: PropTypes.shape({
+    current: timeType,
+  }),
+  startingtime: PropTypes.number.isRequired,
+  timerOn: PropTypes.bool.isRequired,
+};
 export default LapTimer;

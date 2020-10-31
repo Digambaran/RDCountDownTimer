@@ -1,5 +1,6 @@
 import React from "react";
 import calculateMilliSeconds from "./helperFuntions/calculateMilliSeconds";
+import PropTypes from "prop-types";
 
 const CounterForm = React.memo(
   ({
@@ -154,4 +155,26 @@ const CounterForm = React.memo(
     );
   }
 );
+
+CounterForm.propTypes = {
+  setHour: PropTypes.func.isRequired,
+  setMinute: PropTypes.func.isRequired,
+  setSecond: PropTypes.func.isRequired,
+  hour: PropTypes.number.isRequired,
+  second: PropTypes.number.isRequired,
+  minute: PropTypes.number.isRequired,
+  startTimeStamp: PropTypes.number.isRequired,
+  setStartTimeStamp: PropTypes.func.isRequired,
+  pausedTimeStamp: PropTypes.number.isRequired,
+  setPausedTimeStamp: PropTypes.func.isRequired,
+  setOn: PropTypes.func.isRequired,
+  setTotal: PropTypes.func.isRequired,
+  total: PropTypes.number.isRequired,
+  timerOn: PropTypes.bool.isRequired,
+  setTimeLeft: PropTypes.func.isRequired,
+  setLapTime: PropTypes.func.isRequired,
+  setLapStartTime: PropTypes.func.isRequired,
+  lapStartTime: PropTypes.number.isRequired,
+  setList: PropTypes.func.isRequired,
+};
 export default CounterForm;

@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import {timeType} from "./cutomTypes/types";
 
 const List = React.memo(props => {
   const {data} = props;
@@ -14,7 +16,7 @@ const List = React.memo(props => {
         </thead>
         <tbody>
           {data.map(obj => (
-            <tr>
+            <tr key={`tr-${obj.end.ms}`}>
               <td>
                 <p>
                   {obj.start.h}:{obj.start.m}:{obj.start.s}:{obj.start.ms}
@@ -27,7 +29,8 @@ const List = React.memo(props => {
                     obj.lap.s > 20 || obj.lap.m > 0 || obj.lap.h > 0 > 20
                       ? "redflag"
                       : ""
-                  }>
+                  }
+                >
                   {obj.lap.h}:{obj.lap.m}:{obj.lap.s}:{obj.lap.ms}
                 </p>
               </td>
@@ -44,4 +47,14 @@ const List = React.memo(props => {
     </div>
   );
 });
+
+List.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.exact({
+      start: timeType,
+      lap: timeType,
+      end: timeType,
+    })
+  ).isRequired,
+};
 export default List;
