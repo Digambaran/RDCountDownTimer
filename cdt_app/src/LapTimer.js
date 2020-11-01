@@ -23,14 +23,7 @@ const calculateTimeLeft = startingtime => {
       };
 };
 
-function LapTimer({
-  setLapTime,
-  setstartingtime,
-  timePassed,
-  lRef,
-  startingtime,
-  timerOn,
-}) {
+function LapTimer({setLapTime, setstartingtime, timePassed, lRef, startingtime, timerOn}) {
   useEffect(() => {
     if (timerOn) {
       const timer = setTimeout(() => {
@@ -53,15 +46,10 @@ function LapTimer({
     <div className="Lap_Timer">
       <h2>Lap Timer</h2>
       <p>
-        press <em>spacebar</em> to record lap and<em>backspace</em> to merge
-        previous lap
+        press <em>spacebar</em> to record lap and<em>backspace</em> to merge previous lap
       </p>
       <p
-        className={
-          timePassed.s > 20 || timePassed.m > 0 || timePassed.h > 0
-            ? "counter_time redflag"
-            : "counter_time"
-        }
+        className={timePassed.s > 20 || timePassed.m > 0 || timePassed.h > 0 ? "counter_time redflag" : "counter_time"}
       >
         {timePassed.h}:{timePassed.m}:{timePassed.s}:{timePassed.ms}
       </p>

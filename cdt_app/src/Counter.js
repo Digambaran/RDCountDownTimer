@@ -3,24 +3,13 @@ import React, {useEffect} from "react";
 import {timeType} from "./cutomTypes/types";
 import calculateTimeLeft from "./helperFuntions/calculateTimeLeft";
 
-function Counter({
-  startingtime,
-  pausingtime,
-  timerOn,
-  total,
-  setTotal,
-  timeLeft,
-  setTimeLeft,
-  tRef,
-}) {
+function Counter({startingtime, pausingtime, timerOn, total, setTotal, timeLeft, setTimeLeft, tRef}) {
   // const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0, cs: 0 });
 
   useEffect(() => {
     if (timerOn) {
       const timer = setTimeout(() => {
-        setTimeLeft(
-          calculateTimeLeft(startingtime, total, new Date().getTime())
-        );
+        setTimeLeft(calculateTimeLeft(startingtime, total, new Date().getTime()));
         tRef.current = timeLeft;
       }, 1);
       return () => {

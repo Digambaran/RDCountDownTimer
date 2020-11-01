@@ -39,9 +39,7 @@ function App() {
             start: calculateTimeLeft(
               sTSRef.current,
               durationRef.current,
-              lapStartTimeRef.current > 0
-                ? lapStartTimeRef.current
-                : sTSRef.current
+              lapStartTimeRef.current > 0 ? lapStartTimeRef.current : sTSRef.current
             ),
             lap: lapTimeRef.current,
             end: timeLeftRef.current,
@@ -64,9 +62,7 @@ function App() {
       if (sTSRef.current > 0) {
         //add the top entry in lap to current lap
         const newLapStartTime =
-          listRef.current.length !== 0 &&
-          lapStartTimeRef.current -
-            calculateMilliSeconds(listRef.current[0].lap);
+          listRef.current.length !== 0 && lapStartTimeRef.current - calculateMilliSeconds(listRef.current[0].lap);
         setLapStartTime(newLapStartTime);
         lapStartTimeRef.current = newLapStartTime;
         //update the lapstarttime in localstorage
@@ -83,36 +79,26 @@ function App() {
   //on mounting
   useEffect(() => {
     const now = new Date().getTime();
-    const storedCounterValues =
-      JSON.parse(localStorage.getItem("counter")) || false;
+    const storedCounterValues = JSON.parse(localStorage.getItem("counter")) || false;
     if (storedCounterValues) {
       //logic to find state of countdown from stored values
       const newStartTimeStamp =
         storedCounterValues.pausedtimestamp !== 0
-          ? storedCounterValues.starttimestamp +
-            (now - storedCounterValues.pausedtimestamp)
+          ? storedCounterValues.starttimestamp + (now - storedCounterValues.pausedtimestamp)
           : storedCounterValues.starttimestamp;
       setStartTimeStamp(newStartTimeStamp);
       sTSRef.current = newStartTimeStamp;
       console.log("counter", new Date(newStartTimeStamp));
-      storedCounterValues.pausedtimestamp === 0
-        ? setPausedTimeStamp(0)
-        : setPausedTimeStamp(now);
+      storedCounterValues.pausedtimestamp === 0 ? setPausedTimeStamp(0) : setPausedTimeStamp(now);
       setDuration(storedCounterValues.total);
-      storedCounterValues.pause === false &&
-        setOn(true) &&
-        (onRef.current = true);
+      storedCounterValues.pause === false && setOn(true) && (onRef.current = true);
     }
 
     //to set the laptime based on stored value;
-    const storedLapTimerValue =
-      Number(localStorage.getItem("LapStartTimeStamp")) || false;
+    const storedLapTimerValue = Number(localStorage.getItem("LapStartTimeStamp")) || false;
     if (storedLapTimerValue) {
       const newLapStartTime =
-        storedLapTimerValue +
-        (storedCounterValues.pausedtimestamp > 0
-          ? now - storedCounterValues.pausedtimestamp
-          : 0);
+        storedLapTimerValue + (storedCounterValues.pausedtimestamp > 0 ? now - storedCounterValues.pausedtimestamp : 0);
       setLapStartTime(newLapStartTime);
       console.log(new Date(newLapStartTime));
       // localStorage.setItem("LapStartTimeStamp", newLapStartTime);
@@ -129,8 +115,7 @@ function App() {
       setList(laplist);
     }
     //get back the user entered values
-    const enteredValues =
-      JSON.parse(localStorage.getItem("EnteredDuration")) || false;
+    const enteredValues = JSON.parse(localStorage.getItem("EnteredDuration")) || false;
     if (enteredValues) {
       setHr(enteredValues.h);
       setMin(enteredValues.m);

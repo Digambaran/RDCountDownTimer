@@ -67,9 +67,7 @@ const CounterForm = React.memo(
                 timerOnRef.current = true;
                 setStartTimeStamp(st);
                 setLapStartTime(st);
-                setTotal(
-                  calculateMilliSeconds({h: hour, m: minute, s: second, ms: 0})
-                );
+                setTotal(calculateMilliSeconds({h: hour, m: minute, s: second, ms: 0}));
                 localStorage.setItem(
                   "counter",
                   JSON.stringify({
@@ -84,10 +82,7 @@ const CounterForm = React.memo(
                     pause: false,
                   })
                 );
-                localStorage.setItem(
-                  "EnteredDuration",
-                  JSON.stringify({h: hour, m: minute, s: second})
-                );
+                localStorage.setItem("EnteredDuration", JSON.stringify({h: hour, m: minute, s: second}));
               }
             }}
           >
