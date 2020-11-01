@@ -18,6 +18,7 @@ const CounterForm = React.memo(
     setTotal,
     total,
     timerOn,
+    timerOnRef,
     setTimeLeft,
     setLapTime,
     setLapStartTime,
@@ -32,7 +33,7 @@ const CounterForm = React.memo(
           <input
             placeholder={"hours"}
             value={hour > 0 && hour}
-            onChange={e => setHour(e.target.value)}
+            onChange={e => setHour(parseInt(e.target.value))}
             type="number"
             min={0}
             max={24}
@@ -41,7 +42,7 @@ const CounterForm = React.memo(
           <input
             placeholder={"minutes"}
             value={minute > 0 && minute}
-            onChange={e => setMinute(e.target.value)}
+            onChange={e => setMinute(parseInt(e.target.value))}
             type="number"
             min={0}
             max={60}
@@ -50,7 +51,7 @@ const CounterForm = React.memo(
           <input
             placeholder={"seconds"}
             value={second > 0 && second}
-            onChange={e => setSecond(e.target.value)}
+            onChange={e => setSecond(parseInt(e.target.value))}
             type="number"
             min={0}
             max={60}
@@ -63,6 +64,7 @@ const CounterForm = React.memo(
               const st = new Date().getTime();
               if (startTimeStamp === 0) {
                 setOn(true);
+                timerOnRef.current = true;
                 setStartTimeStamp(st);
                 setLapStartTime(st);
                 setTotal(
@@ -95,6 +97,7 @@ const CounterForm = React.memo(
           <button
             onClick={() => {
               setOn(false);
+              timerOnRef.current = false;
               const now = new Date().getTime();
               setPausedTimeStamp(now);
               localStorage.setItem(
@@ -113,6 +116,7 @@ const CounterForm = React.memo(
           <button
             onClick={() => {
               setOn(true);
+              timerOnRef.current = true;
               const now = new Date().getTime();
               setStartTimeStamp(startTimeStamp + (now - pausedTimeStamp));
               setLapStartTime(lapStartTime + (now - pausedTimeStamp));
@@ -171,6 +175,9 @@ CounterForm.propTypes = {
   setTotal: PropTypes.func.isRequired,
   total: PropTypes.number.isRequired,
   timerOn: PropTypes.bool.isRequired,
+  timerOnRef: PropTypes.shape({
+    current: PropTypes.bool.isRequired,
+  }).isRequired,
   setTimeLeft: PropTypes.func.isRequired,
   setLapTime: PropTypes.func.isRequired,
   setLapStartTime: PropTypes.func.isRequired,

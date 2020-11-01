@@ -1,30 +1,8 @@
-import React, {useEffect} from "react";
 import PropTypes from "prop-types";
+import React, {useEffect} from "react";
 import {timeType} from "./cutomTypes/types";
-/**
- * function to calculate the time left and return a timeLeft object
- * @param {Number} startingtime starting timestamp
- * @param {Number} pausingtime last paused timestamp
- * @param {Number} total total time left
- * @returns
- */
-const calculateTimeLeft = (startingtime, pausingtime, total) => {
-  const now = new Date().getTime();
-  let difference = Math.floor(total - (now - startingtime));
-  return difference >= 0
-    ? {
-        h: Math.floor((difference / 3600000) % 24),
-        m: Math.floor((difference / 1000 / 60) % 60),
-        s: Math.floor((difference / 1000) % 60),
-        ms: Math.floor((difference / 1) % 1000),
-      }
-    : {
-        h: Math.ceil((difference / 3600000) % 24),
-        m: Math.ceil((difference / 1000 / 60) % 60),
-        s: Math.ceil((difference / 1000) % 60),
-        ms: Math.ceil((difference / 1) % 1000),
-      };
-};
+import calculateTimeLeft from "./helperFuntions/calculateTimeLeft";
+
 function Counter({
   startingtime,
   pausingtime,
@@ -40,7 +18,9 @@ function Counter({
   useEffect(() => {
     if (timerOn) {
       const timer = setTimeout(() => {
-        setTimeLeft(calculateTimeLeft(startingtime, pausingtime, total));
+        setTimeLeft(
+          calculateTimeLeft(startingtime, total, new Date().getTime())
+        );
         tRef.current = timeLeft;
       }, 1);
       return () => {
@@ -50,8 +30,8 @@ function Counter({
   });
 
   useEffect(() => {
-    startingtime > 0 &&
-      setTimeLeft(calculateTimeLeft(startingtime, pausingtime, total));
+    const v = calculateTimeLeft(startingtime, total, new Date().getTime());
+    return startingtime > 0 && setTimeLeft(v) && (tRef.current = v);
   }, [startingtime]);
 
   return (

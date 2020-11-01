@@ -34,8 +34,9 @@ function LapTimer({
   useEffect(() => {
     if (timerOn) {
       const timer = setTimeout(() => {
-        setLapTime(calculateTimeLeft(startingtime));
-        lRef.current = timePassed;
+        const tp = calculateTimeLeft(startingtime);
+        setLapTime(tp);
+        lRef.current = tp;
       }, 1);
       return () => {
         clearTimeout(timer);
@@ -44,7 +45,9 @@ function LapTimer({
   });
 
   useEffect(() => {
-    startingtime > 0 && setLapTime(calculateTimeLeft(startingtime));
+    const l = calculateTimeLeft(startingtime);
+    console.log("timeleft in laptimer", l, new Date(startingtime));
+    return startingtime > 0 && setLapTime(l) && (lRef.current = l);
   }, [startingtime]);
   return (
     <div className="Lap_Timer">
