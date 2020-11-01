@@ -2,8 +2,15 @@ import React from "react";
 import {render} from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
-  const {getByText} = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test("Displays headers and buttons and inputs", () => {
+  const {getByText, getAllByPlaceholderText} = render(<App />);
+  getByText("Count Down Timer");
+  getByText("Lap Timer");
+  getByText("start");
+  getByText("pause");
+  getByText("resume");
+  getByText("reset");
+  getAllByPlaceholderText("hours");
+  getAllByPlaceholderText("minutes");
+  getAllByPlaceholderText("seconds");
 });
