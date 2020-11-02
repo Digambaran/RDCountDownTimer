@@ -28,6 +28,7 @@ function LapTimer({setLapTime, setstartingtime, timePassed, lRef, startingtime, 
         press <em>spacebar</em> to record lap and<em>backspace</em> to merge previous lap
       </p>
       <p
+        data-testid="lap_time"
         className={timePassed.s > 20 || timePassed.m > 0 || timePassed.h > 0 ? "counter_time redflag" : "counter_time"}
       >
         {timePassed.h}:{timePassed.m}:{timePassed.s}:{timePassed.ms}
