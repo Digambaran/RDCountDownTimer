@@ -99,7 +99,7 @@ const CounterForm = React.memo(
                 "counter",
                 JSON.stringify({
                   starttimestamp: startTimeStamp,
-                  pausedtimestamp: pausedTimeStamp > 0 ? pausedTimeStamp : now,
+                  pausedtimestamp: now,
                   total: total,
                   pause: true,
                 })

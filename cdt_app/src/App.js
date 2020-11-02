@@ -88,7 +88,6 @@ function App() {
           : storedCounterValues.starttimestamp;
       setStartTimeStamp(newStartTimeStamp);
       sTSRef.current = newStartTimeStamp;
-      console.log("counter", new Date(newStartTimeStamp));
       storedCounterValues.pausedtimestamp === 0 ? setPausedTimeStamp(0) : setPausedTimeStamp(now);
       setDuration(storedCounterValues.total);
       storedCounterValues.pause === false && setOn(true) && (onRef.current = true);
