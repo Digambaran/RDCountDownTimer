@@ -1,33 +1,13 @@
 import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {timeType} from "./cutomTypes/types";
-/**
- * returns the time differece in object
- * @param {Number} startingtime starting timestamp
- */
-const calculateTimeLeft = startingtime => {
-  const now = new Date().getTime();
-  let difference = Math.floor(now - startingtime);
-  return difference >= 0
-    ? {
-        h: Math.floor((difference / 3600000) % 24),
-        m: Math.floor((difference / 1000 / 60) % 60),
-        s: Math.floor((difference / 1000) % 60),
-        ms: Math.floor((difference / 1) % 1000),
-      }
-    : {
-        h: Math.ceil((difference / 3600000) % 24),
-        m: Math.ceil((difference / 1000 / 60) % 60),
-        s: Math.ceil((difference / 1000) % 60),
-        ms: Math.ceil((difference / 1) % 1000),
-      };
-};
+import calculateTimePassed from "./helperFuntions/calculateTimePassed";
 
 function LapTimer({setLapTime, setstartingtime, timePassed, lRef, startingtime, timerOn}) {
   useEffect(() => {
     if (timerOn) {
       const timer = setTimeout(() => {
-        const tp = calculateTimeLeft(startingtime);
+        const tp = calculateTimePassed(startingtime);
         setLapTime(tp);
         lRef.current = tp;
       }, 1);
@@ -38,10 +18,9 @@ function LapTimer({setLapTime, setstartingtime, timePassed, lRef, startingtime, 
   });
 
   useEffect(() => {
-    const l = calculateTimeLeft(startingtime);
-    console.log("timeleft in laptimer", l, new Date(startingtime));
+    const l = calculateTimePassed(startingtime);
     return startingtime > 0 && setLapTime(l) && (lRef.current = l);
-  }, [startingtime]);
+  }, [lRef, setLapTime, startingtime]);
   return (
     <div className="Lap_Timer">
       <h2>Lap Timer</h2>
